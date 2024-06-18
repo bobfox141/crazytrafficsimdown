@@ -13,6 +13,22 @@
 
 # so, the traffic light is set up so it can interface directly with a 
 # display object, i.e. each invidual light is enabled. 
+RED = 0
+YELLOW = 1
+GREEN = 2
+GREENARROWLEFT = 3
+GREENARROWRIGHT = 4 
+CAUTIONARROWLEFT = 5
+CAUTIONARROWRIGHT = 6
+
+BASIC = 0 
+SIMPLESIGNAL = 1
+FOURWAYSTOP = 2
+FOURWAYCAUTION = 3
+SIMPLELEFTARROW = 4
+SIMPLERIGHTARROW = 5
+SIMPLELEFTCAUTION = 6
+SIMPLERIGHTCAUTION = 7
 
 class TrafficLight
 
