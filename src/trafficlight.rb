@@ -14,7 +14,7 @@
 # so, the traffic light is set up so it can interface directly with a 
 # display object, i.e. each invidual light is enabled. 
 
-require_relative "timer.rb"
+require "./timer.rb"
 
 RED = 0
 YELLOW = 1
@@ -85,7 +85,7 @@ class TrafficLight
 
 
 	def go
-		t = Timer.new
+		t = LightTimer.new
 		setRed()
 		count = 0
 		timings = setTimings

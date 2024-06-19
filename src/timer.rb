@@ -8,11 +8,11 @@ require "time"
 class LightTimer
     def initialize
         @t = Time.new
-        @current = @t.now 
+        @current = Time.now 
     end
-    
+
     def now 
-        return @t.now.to_i
+        return Time.now.to_i
     end
 
 end
