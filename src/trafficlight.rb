@@ -14,7 +14,7 @@
 # so, the traffic light is set up so it can interface directly with a 
 # display object, i.e. each invidual light is enabled. 
 
-require "timer.rb"
+require_relative "timer.rb"
 
 RED = 0
 YELLOW = 1
@@ -38,18 +38,21 @@ class TrafficLight
 	end
 
 	def setRed
+		@state = RED
 		@red = true
 		@yellow = false
 		@green = false
 	end
 	
 	def setGreen
+		@state = GREEN
 		@red = false
 		@yellow = false
 		@green = true
 	end
 	
 	def setYellow
+		@state = YELLOW
 		@red = false
 		@yellow = true
 		@green = false
@@ -84,27 +87,37 @@ class TrafficLight
 	def go
 		t = Timer.new
 		setRed()
+		count = 0
 		timings = setTimings
 		seqbegin = t.now
 		seqswitch = seqbegin + timings[RED]
 		while not @done
 			current = t.now
-			if current >= seqswitch 
-				if @red == true then 
+			if current >= seqswitch then 
+				if @state == RED then 
 					setGreen
 					seqswitch = seqbegin + timings[GREEN]
 					puts "Switching the active light to Green"
-				elsif @yellow == true then 
+				end 
+				if @state == YELLOW then 
 					setRed
 					seqswitch = seqbegin + timings[RED]
 					puts "Switching the active light to Red, will switch again in #{current + timings[RED]}"
-				elsif @green == true then 
+				end
+				if @state == GREEN then 
 					setYellow
 					seqswitch = seqbegin + timings[YELLOW]
+					puts "Switching the active light to Yellow, will switch again in #{current + timings[YELLOW]}"
 				end
 			else
-				sleep 0.2  # running at about 5hz 
+				sleep(0.2)  # running at about 5hz 
+				count = count + 1
 			end
+			if count > 5 then 
+				showLight
+				count = 0
+			end
+
 		end
 		puts "Loop ended, controller exiting."
 	end
@@ -113,6 +126,7 @@ class TrafficLight
 		puts "Red:    #{@red}"
 		puts "Yellow: #{@yellow}"
 		puts "Green:  #{@green}"
+	end
 
 		
 

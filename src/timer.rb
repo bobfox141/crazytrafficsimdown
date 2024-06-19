@@ -3,12 +3,16 @@
 # description: a simple timer in ruby. 
 # author: smg
 
-require "Time"
+require "time"
 
 class LightTimer
-
+    def initialize
+        @t = Time.new
+        @current = @t.now 
+    end
+    
     def now 
-        return Time.now.to_i
+        return @t.now.to_i
     end
 
 end
