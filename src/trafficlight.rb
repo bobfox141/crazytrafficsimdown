@@ -94,8 +94,10 @@ class TrafficLight
 		while not @done
 			current = t.now
 			if current >= seqswitch then 
+				seqbegin = @current
 				if @state == RED then 
 					setGreen
+					
 					seqswitch = seqbegin + timings[GREEN]
 					puts "Switching the active light to Green"
 				end 
@@ -123,6 +125,7 @@ class TrafficLight
 	end
 		
 	def showLight
+		
 		puts "Red:    #{@red}"
 		puts "Yellow: #{@yellow}"
 		puts "Green:  #{@green}"
